@@ -32,8 +32,13 @@ vector<ll> factorize(ll n)
         if (n % p == 0)
         {
             factors.push_back(p);
+            // For All Factors
+            // n = n / p;
             while (n % p == 0)
+            {
                 n = n / p;
+                // factors.push_back(p);
+            }
         }
         i++;
         p = pm[i];
