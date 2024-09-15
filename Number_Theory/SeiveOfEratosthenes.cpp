@@ -8,7 +8,7 @@ vector<bool> Seive(int n)
     vector<bool> primes(n + 1, true);
     primes[0] = false;
     primes[1] = false;
-    for (int p = 2; p * p <= n; p++)
+    for (int p = 2; p <= n; p++)
     {
         if (primes[p] == true)
         {
