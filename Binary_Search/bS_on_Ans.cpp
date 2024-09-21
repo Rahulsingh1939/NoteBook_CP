@@ -1,34 +1,12 @@
 #include <bits/stdc++.h>
-
-#define ll long long
-#define int long long
-#define For(i, a, b) for (int i = (a); i < (b); i++)
-#define in(a)            \
-    for (auto &it : (a)) \
-        cin >> it;
-#define out(b)           \
-    for (auto &it : (b)) \
-        cout << it << " ";
-#define vi vector<int>
-#define vl vector<long long>
-#define pb push_back
-#define F first
-#define S second
-#define ld long double
-#define pii pair<int, int>
-
-const ll MOD = 1e9 + 7;
+const int MOD = 1e9 + 7;
 int n, k;
 
 using namespace std;
-int noOfPiece(ld d, vector<int> v)
+bool Check(int mid, vector<int> v)
 {
-    int c = 0;
-    for (int i = 0; i < n; i++)
-    {
-        c += (v[i] / d);
-    }
-    return c;
+    // Check for Statement
+    return true;
 }
 void wise_crack()
 {
@@ -36,22 +14,16 @@ void wise_crack()
     cin >> n >> k;
     vector<int> v(n, 0);
     int mx = 1e9;
-    for (int i = 0; i < n; i++)
+    int l = 0, h = mx;
+    while (l <= h)
     {
-        cin >> v[i];
-        mx = min<ll>(v[i], mx);
-    }
-    ld l = 0, h = (ld)mx;
-    while (h - l > 1e-6)
-    {
-        ld m = (l + h) / (2.0);
-        int cnt = noOfPiece(m, v);
-        if (cnt >= k)
-            l = m;
+        int m = l + (h - l) / 2;
+        if (Check(m, v))
+            l = m + 1;
         else
-            h = m;
+            h = m - 1;
     }
-    cout << h << endl;
+    cout << h << l << endl;
     return;
 }
 signed main()
