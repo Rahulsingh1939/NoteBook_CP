@@ -11,8 +11,7 @@ int main()
     int t;
     cin >> t;
     vector<int> v(t);
-    vector<int> preSum(t, 0);
-    ll s = 0;
+    vector<int> diffArray(t, 0);
     // Difference Array Method Method
     // Range Query Operation - O(1)
     // Point Update Method - O(N)
@@ -25,14 +24,21 @@ int main()
     // For every Query, Given is L,R,Val
     // Type of operation
     // Given L,R,Val increase all values in [l,r] by Val
+    // Print Final Array After Q Operations.
     while (q--)
     {
-        int l, r;
-        cin >> l >> r;
-        int x = 0;
-        if (l - 1 > 0)
-            x = preSum[l - 2];
-        cout << preSum[r - 1] - x << endl;
+        int l, r, val;
+        cin >> l >> r >> val;
+        diffArray[l - 1] += val;
+        if (r < t)
+            diffArray[r] += -1 * val;
     }
+    int s = 0;
+    for (int i = 0; i < t; i++)
+    {
+        s += diffArray[i];
+        cout << v[i] + s << " ";
+    }
+    cout << endl;
     return 0;
 }
