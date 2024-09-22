@@ -44,7 +44,7 @@ int query(int start, int end, int index, int l, int r)
         return 0;
 
     // Complete overlap
-    if (l >= start && r <= end)
+    if (start >= l && end <= r)
         return segTree[index];
 
     // Partial overlap
