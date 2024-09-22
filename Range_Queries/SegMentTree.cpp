@@ -18,6 +18,7 @@ void build_Segment(vector<int> &arr, int start, int end, int index)
     build_Segment(arr, mid + 1, end, right);
     segTree[index] = segTree[left] + segTree[right];
 }
+
 void update_Segment(vector<int> &arr, int start, int end, int index, int pos, int val)
 {
     if (start == end)
@@ -52,6 +53,7 @@ int query(int start, int end, int index, int l, int r)
     int right_ans = query(mid + 1, end, 2 * index + 1, l, r);
     return left_ans + right_ans;
 }
+
 int main()
 {
     ios_base::sync_with_stdio(false);
