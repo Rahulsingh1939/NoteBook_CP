@@ -16,7 +16,7 @@ void build_Segment(vector<int> &arr, int start, int end, int index)
     int left = 2 * index, right = 2 * index + 1;
     build_Segment(arr, start, mid, left);
     build_Segment(arr, mid + 1, end, right);
-    segTree[index] = segTree[left] + segTree[right];
+    segTree[index] = min(segTree[left], segTree[right]);
 }
 
 void update_Segment(vector<int> &arr, int start, int end, int index, int pos, int val)
@@ -41,7 +41,7 @@ int query(int start, int end, int index, int l, int r)
 {
     // No overlap
     if (r < start || l > end)
-        return 0;
+        return INT_MAX;
 
     // Complete overlap
     if (start >= l && end <= r)
@@ -51,7 +51,7 @@ int query(int start, int end, int index, int l, int r)
     int mid = start + (end - start) / 2;
     int left_ans = query(start, mid, 2 * index, l, r);
     int right_ans = query(mid + 1, end, 2 * index + 1, l, r);
-    return (left_ans, right_ans);
+    return min(left_ans, right_ans);
 }
 
 int main()
@@ -61,7 +61,7 @@ int main()
     cout.tie(NULL);
     int n;
     cin >> n;
-    segTree.resize(2 * n + 1);
+    segTree.resize(4 * n, INT_MAX);
     vector<int> arr(n);
     for (auto &it : arr)
         cin >> it;
