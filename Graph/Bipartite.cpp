@@ -12,7 +12,7 @@ int main()
     cout.tie(NULL);
     int n, m;
     cin >> n >> m;
-    vector<int> adj[n + 1];
+    vector<int> adj[n];
     int u, v;
     // Adjancy list Input
 
@@ -46,10 +46,27 @@ int main()
         }
         return true;
     };
+
+    function<bool(int, int)> isBi_DFS = [&](int node, int col)
+    {
+        color[node] = col;
+        for (int it : adj[node])
+        {
+            if (color[it] == -1)
+            {
+                if (!isBi_DFS(it, !col))
+                    return false;
+            }
+            else if (color[it] == col)
+                return false;
+        }
+        return true;
+    };
+
     for (int i = 0; i < n; i++)
     {
         if (color[i] == -1)
-            if (!isBipartite(i))
+            if (!isBi_DFS(i, 0))
             {
                 cout << "Not Bipartite" << endl;
                 return 0;
